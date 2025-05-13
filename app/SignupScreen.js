@@ -1,7 +1,7 @@
 // SignupScreen.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from 'expo-router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   ImageBackground,
   Modal,
