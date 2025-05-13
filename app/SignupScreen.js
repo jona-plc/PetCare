@@ -47,10 +47,9 @@ const SignupScreen = () => {
       setModalVisible(true);
     }
   };
-
   return (
     <ImageBackground
-      source={{ uri: 'https://cdn.wallpapersafari.com/32/64/rb06gs.jpg' }}
+      source={require('../assets/images/signup.png')} // Correct way to reference local image
       style={styles.background}
     >
       <View style={styles.container}>

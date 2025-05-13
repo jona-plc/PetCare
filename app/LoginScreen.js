@@ -1,15 +1,15 @@
 // LoginScreen.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from 'expo-router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
-    ImageBackground,
-    Modal,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
+  ImageBackground,
+  Modal,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 const LoginScreen = () => {
@@ -39,12 +39,11 @@ const LoginScreen = () => {
       setModalVisible(true);
     }
   };
-
-  return (
-    <ImageBackground
-      source={{ uri: 'https://img.freepik.com/vector-gratis/vector-fondo-perro-ilustracion-mascotas-lindas_53876-127697.jpg?w=2000&t=st=1662439818~exp=1662440418~hmac=f5c203050e1eea8eb8ee7a5551e5fe2d4e1efbc0bd7590fce55040c6a8048e26' }}
-      style={styles.background}
-    >
+return (
+  <ImageBackground
+    source={require('../assets/images/login (2).png')}  // Correct local image path
+    style={styles.background}
+  >
       <View style={styles.container}>
         <Text style={styles.title}>LOG IN</Text>
         <Text style={styles.subtitle}>Hello, Welcome Back</Text>
