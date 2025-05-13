@@ -13,12 +13,10 @@ export default function SplashScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={{
-          uri: 'https://static.vecteezy.com/system/resources/previews/009/551/676/original/shy-dog-logo-illustration-depicting-shy-dog-suitable-for-pet-company-free-vector.jpg',
-        }}
-        style={styles.logo}
+  <View style={styles.container}>
+    <Image
+      source={require('../assets/images/login (2).png')} 
+  style={styles.logo}
       />
       <Text style={styles.title}>Welcome to PetCare</Text>
       <Text style={styles.tagline}>
