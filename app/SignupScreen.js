@@ -1,5 +1,6 @@
 // SignupScreen.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Asset } from 'expo-asset';
 import { useNavigation } from 'expo-router';
 import { useState } from 'react';
 import {
@@ -21,6 +22,8 @@ const SignupScreen = () => {
   const [error, setError] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const signupImage = Asset.fromModule(require('../assets/images/signup.png')).uri;
 
   const handleSignup = async () => {
     if (!username || !email || !password || !confirmPassword) {
@@ -47,9 +50,10 @@ const SignupScreen = () => {
       setModalVisible(true);
     }
   };
+
   return (
     <ImageBackground
-      source={require('../assets/images/signup.png')} // Correct way to reference local image
+      source={{ uri: signupImage }}
       style={styles.background}
     >
       <View style={styles.container}>
@@ -60,16 +64,12 @@ const SignupScreen = () => {
           visible={modalVisible}
           transparent
           animationType="slide"
-          onRequestClose={() => setModalVisible(false)}
         >
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <Text style={[styles.error, error === 'Signup successful! Redirecting...' && styles.success]}>
                 {error}
               </Text>
-              <TouchableOpacity onPress={() => setModalVisible(false)}>
-                <Text style={styles.closeButton}>Close</Text>
-              </TouchableOpacity>
             </View>
           </View>
         </Modal>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     marginBottom: 20,
-  },  
+  },
   input: {
     backgroundColor: '#fff',
     padding: 12,
@@ -192,11 +192,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '80%',
     alignItems: 'center',
-  },
-  closeButton: {
-    marginTop: 10,
-    color: 'blue',
-    fontWeight: 'bold',
   },
   togglePassword: {
     color: '#fff',

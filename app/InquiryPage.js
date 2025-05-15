@@ -1,88 +1,195 @@
-import { Alert, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
+import { useState } from 'react';
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-const InquiryPage = ({ route, navigation }) => {
-  const { pet } = route.params;
+export default function InquiryPage() {
+  const { name, breed, age, description } = useLocalSearchParams();
+
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [reason, setReason] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [modalSuccess, setModalSuccess] = useState(false);
 
   const handleSubmit = () => {
-    // Here, you can send the form data to your backend or show a confirmation
-    Alert.alert('Inquiry Submitted', `Thank you for your interest in ${pet.name}!`);
-    navigation.goBack();
+    if (!fullName.trim() || !email.trim() || !reason.trim()) {
+      setModalMessage('Please fill out all fields.');
+      setModalSuccess(false);
+    } else {
+      setModalMessage('Thank you for your interest! Your inquiry has been submitted.');
+      setModalSuccess(true);
+      // Clear form (optional)
+      setFullName('');
+      setEmail('');
+      setReason('');
+    }
+    setModalVisible(true);
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>{pet.action}</Text>
-      <Image source={{ uri: pet.image }} style={styles.petImage} />
-      <Text style={styles.petInfo}>{pet.breed} • {pet.age}</Text>
-      <Text style={styles.petDescription}>{pet.description}</Text>
+    <ScrollView style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.petTitle}>{name}</Text>
+        <Text style={styles.petSubInfo}>{breed} • {age}</Text>
+        <Text style={styles.petDescription}>{description}</Text>
+      </View>
 
-      <TextInput placeholder="Your Name" style={styles.input} />
-      <TextInput placeholder="Contact Number" keyboardType="phone-pad" style={styles.input} />
-      <TextInput placeholder="Address" style={styles.input} />
+      <Text style={styles.formHeader}>Adoption/Rescue Form</Text>
+
       <TextInput
-        placeholder="Why do you want to adopt/rescue?"
+        style={styles.input}
+        placeholder="Your Full Name"
+        placeholderTextColor="#888"
+        value={fullName}
+        onChangeText={setFullName}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Your Email Address"
+        placeholderTextColor="#888"
+        keyboardType="email-address"
+        value={email}
+        onChangeText={setEmail}
+      />
+      <TextInput
+        style={[styles.input, styles.textArea]}
+        placeholder="Why are you interested in this pet?"
+        placeholderTextColor="#888"
         multiline
-        numberOfLines={4}
-        style={[styles.input, { height: 100 }]}
+        value={reason}
+        onChangeText={setReason}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit Inquiry</Text>
+      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+        <Text style={styles.submitButtonText}>Submit Inquiry</Text>
       </TouchableOpacity>
+
+      {/* Modal */}
+      <Modal
+        transparent={true}
+        animationType="fade"
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalBackground}>
+          <View style={[styles.modalContainer, modalSuccess ? styles.successModal : styles.failModal]}>
+            <Text style={styles.modalText}>{modalMessage}</Text>
+            <Pressable
+              style={styles.modalButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.modalButtonText}>OK</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: '#F3F4F6',
     padding: 20,
+  },
+  card: {
     backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 12,
+    marginBottom: 25,
+    elevation: 3,
   },
-  title: {
-    fontSize: 22,
+  petTitle: {
+    fontSize: 26,
     fontWeight: 'bold',
-    marginBottom: 15,
-    textAlign: 'center',
-    color: '#4A90E2',
+    color: '#333',
+    marginBottom: 6,
   },
-  petImage: {
-    width: '100%',
-    height: 200,
-    borderRadius: 10,
+  petSubInfo: {
+    fontSize: 16,
+    color: '#666',
     marginBottom: 10,
   },
-  petInfo: {
-    fontSize: 16,
-    color: '#555',
-    marginBottom: 5,
-    textAlign: 'center',
-  },
   petDescription: {
-    fontSize: 14,
+    fontSize: 15,
     color: '#444',
-    marginBottom: 20,
-    textAlign: 'center',
+    lineHeight: 22,
+  },
+  formHeader: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 15,
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
+    backgroundColor: '#fff',
     padding: 12,
+    fontSize: 16,
+    borderRadius: 10,
     marginBottom: 15,
-    backgroundColor: '#f9f9f9',
+    borderColor: '#ccc',
+    borderWidth: 1,
   },
-  button: {
+  textArea: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
+  submitButton: {
     backgroundColor: '#4A90E2',
-    padding: 15,
-    borderRadius: 8,
+    paddingVertical: 15,
+    borderRadius: 10,
     alignItems: 'center',
     marginTop: 10,
   },
-  buttonText: {
+  submitButtonText: {
     color: '#fff',
-    fontWeight: '600',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.35)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    width: '80%',
+    borderRadius: 15,
+    padding: 25,
+    alignItems: 'center',
+  },
+  successModal: {
+    backgroundColor: '#D4EDDA',
+  },
+  failModal: {
+    backgroundColor: '#F8D7DA',
+  },
+  modalText: {
+    fontSize: 18,
+    color: '#333',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  modalButton: {
+    backgroundColor: '#4A90E2',
+    paddingVertical: 12,
+    paddingHorizontal: 35,
+    borderRadius: 10,
+  },
+  modalButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
     fontSize: 16,
   },
 });
-
-export default InquiryPage;

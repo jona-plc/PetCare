@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import {
   Image,
@@ -32,7 +32,13 @@ const Dashboard = () => {
 
   const goToAdoption = () => {
     toggleMenu();
-    navigation.navigate('AdoptionRescue'); // ✅ must match the file name
+    navigation.navigate('AdoptionRescue');
+  };
+
+  // ✅ Add this function for accessories
+  const goToAccessories = () => {
+    toggleMenu();
+    navigation.navigate('PetAccessories');
   };
 
   return (
@@ -69,12 +75,16 @@ const Dashboard = () => {
             <TouchableOpacity onPress={toggleMenu} style={styles.closeBtn}>
               <Ionicons name="close" size={30} color="#333" />
             </TouchableOpacity>
-            <TouchableOpacity>
+
+            {/* ✅ Updated this item to call the function */}
+            <TouchableOpacity onPress={goToAccessories}>
               <Text style={styles.menuItem}>Pet Accessories & Essentials</Text>
             </TouchableOpacity>
+
             <TouchableOpacity onPress={goToAdoption}>
               <Text style={styles.menuItem}>Adoption & Rescue</Text>
             </TouchableOpacity>
+
             <TouchableOpacity>
               <Text style={styles.menuItem}>Seasonal Pet Care Tips</Text>
             </TouchableOpacity>
@@ -96,6 +106,7 @@ const Dashboard = () => {
     </View>
   );
 };
+
 
 export default Dashboard;
 

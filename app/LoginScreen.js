@@ -1,5 +1,6 @@
 // LoginScreen.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Asset } from 'expo-asset';
 import { useNavigation } from 'expo-router';
 import { useState } from 'react';
 import {
@@ -18,6 +19,9 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+
+  // Load the image URI using expo-asset for cross-platform compatibility
+  const loginImage = Asset.fromModule(require('../assets/images/login.png')).uri;
 
   const handleLogin = async () => {
     try {
@@ -39,11 +43,12 @@ const LoginScreen = () => {
       setModalVisible(true);
     }
   };
-return (
-  <ImageBackground
-    source={require('../assets/images/login (2).png')}  // Correct local image path
-    style={styles.background}
-  >
+
+  return (
+    <ImageBackground
+      source={{ uri: loginImage }}
+      style={styles.background}
+    >
       <View style={styles.container}>
         <Text style={styles.title}>LOG IN</Text>
         <Text style={styles.subtitle}>Hello, Welcome Back</Text>

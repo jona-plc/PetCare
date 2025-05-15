@@ -1,12 +1,21 @@
+// app/AdoptionRescue.js
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useRouter } from 'expo-router';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const pets = [
   {
     name: 'Daisy',
     breed: 'Golden Retriever',
     age: '3 Years Old',
-    image: 'https://placedog.net/600/400?id=20', 
+    image: 'https://placedog.net/600/400?id=20',
     action: 'Adopt Daisy',
     description: 'Daisy is a friendly, active dog looking for a loving home.',
   },
@@ -58,40 +67,47 @@ const recentlyRescuedPets = [
   { name: 'Jack', image: 'https://placedog.net/300/200?id=67' },
 ];
 
-const AdoptionRescue = ({ navigation }) => {
+const AdoptionRescue = () => {
+  const router = useRouter();
+
   const handleAdoptClick = (pet) => {
-    // Navigate to the InquiryPage and pass the pet information as params
-    navigation.navigate('InquiryPage', { pet });
+    router.push({
+      pathname: '/InquiryPage',
+      params: {
+        name: pet.name,
+        breed: pet.breed,
+        age: pet.age,
+        description: pet.description,
+      },
+    });
   };
 
   return (
     <ScrollView style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <Ionicons name="heart-circle-outline" size={48} color="#ff5c5c" />
         <Text style={styles.headerTitle}>Adoption & Rescue</Text>
         <Text style={styles.headerSubtitle}>Give them a second chance.</Text>
       </View>
 
-      {/* Scrollable Pet Cards */}
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.cardScroll}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.cardScroll}
+      >
         {pets.map((pet, index) => (
           <View key={index} style={styles.featuredCard}>
             <Image source={{ uri: pet.image }} style={styles.featuredImage} />
             <Text style={styles.petName}>{pet.name}</Text>
             <Text style={styles.petInfo}>{pet.breed} • {pet.age}</Text>
             <Text style={styles.petDesc}>{pet.description}</Text>
-            <TouchableOpacity
-              style={styles.adoptButton}
-              onPress={() => handleAdoptClick(pet)} // Correctly calling navigation
-            >
+            <TouchableOpacity style={styles.adoptButton} onPress={() => handleAdoptClick(pet)}>
               <Text style={styles.adoptButtonText}>{pet.action}</Text>
             </TouchableOpacity>
           </View>
         ))}
       </ScrollView>
 
-      {/* Adoption Steps */}
       <Text style={styles.sectionTitle}>How to Adopt</Text>
       <View style={styles.steps}>
         <View style={styles.step}>
@@ -122,7 +138,6 @@ const AdoptionRescue = ({ navigation }) => {
         ))}
       </ScrollView>
 
-      {/* Recently Rescued */}
       <Text style={styles.sectionTitle}>Recently Rescued</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.storyScroll}>
         {recentlyRescuedPets.map((pet, index) => (
@@ -132,24 +147,22 @@ const AdoptionRescue = ({ navigation }) => {
           </View>
         ))}
       </ScrollView>
+
       <Text style={styles.sectionTitle}>Meet our Volunteers</Text>
-<ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.storyScroll}>
-  {[
-    { name: 'Anna', image: 'https://randomuser.me/api/portraits/women/44.jpg' },
-    { name: 'John', image: 'https://randomuser.me/api/portraits/men/45.jpg' },
-    { name: 'Grace', image: 'https://randomuser.me/api/portraits/women/46.jpg' },
-    { name: 'Mike', image: 'https://randomuser.me/api/portraits/men/47.jpg' },
-  ].map((volunteer, index) => (
-    <View key={index} style={styles.storyCard}>
-      <Image source={{ uri: volunteer.image }} style={styles.storyImage} />
-      <Text style={styles.storyText}>Volunteer: {volunteer.name}</Text>
-    </View>
-  ))}
-</ScrollView>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.storyScroll}>
+        {[{ name: 'Anna', image: 'https://randomuser.me/api/portraits/women/44.jpg' },
+          { name: 'John', image: 'https://randomuser.me/api/portraits/men/45.jpg' },
+          { name: 'Grace', image: 'https://randomuser.me/api/portraits/women/46.jpg' },
+          { name: 'Mike', image: 'https://randomuser.me/api/portraits/men/47.jpg' },
+        ].map((volunteer, index) => (
+          <View key={index} style={styles.storyCard}>
+            <Image source={{ uri: volunteer.image }} style={styles.storyImage} />
+            <Text style={styles.storyText}>Volunteer: {volunteer.name}</Text>
+          </View>
+        ))}
+      </ScrollView>
 
-
-      {/* Final Call to Action */}
-      <TouchableOpacity style={styles.adoptButton}>
+      <TouchableOpacity style={styles.adoptButton} onPress={() => alert('Browse all pets feature coming soon!')}>
         <Text style={styles.adoptButtonText}>Browse All Pets for Adoption</Text>
       </TouchableOpacity>
     </ScrollView>
@@ -157,110 +170,26 @@ const AdoptionRescue = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F9FAFB',
-    padding: 20,
-  },
-  header: {
-    alignItems: 'center',
-    marginBottom: 25,
-  },
-  headerTitle: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    marginTop: 5,
-  },
-  headerSubtitle: {
-    fontSize: 16,
-    color: '#666',
-    marginTop: 4,
-  },
-  cardScroll: {
-    marginBottom: 25,
-  },
-  featuredCard: {
-    width: 280,
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 15,
-    elevation: 3,
-    marginRight: 20,
-  },
-  featuredImage: {
-    width: '100%',
-    height: 180,
-    borderRadius: 10,
-  },
-  petName: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  petInfo: {
-    fontSize: 14,
-    color: '#888',
-    marginBottom: 8,
-  },
-  petDesc: {
-    fontSize: 14,
-    color: '#444',
-    marginBottom: 12,
-  },
-  adoptButton: {
-    backgroundColor: '#4A90E2',
-    paddingVertical: 10,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  adoptButtonText: {
-    color: '#fff',
-    fontSize: 15,
-    fontWeight: '600',
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    marginTop: 10,
-    color: '#333',
-  },
-  steps: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 25,
-  },
-  step: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  stepText: {
-    marginTop: 5,
-    fontSize: 12,
-    color: '#444',
-    textAlign: 'center',
-  },
-  storyScroll: {
-    marginBottom: 25,
-  },
-  storyCard: {
-    width: 150,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginRight: 15,
-    elevation: 2,
-    overflow: 'hidden',
-  },
-  storyImage: {
-    width: '100%',
-    height: 100,
-  },
-  storyText: {
-    padding: 10,
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#333',
-  },
+  container: { flex: 1, backgroundColor: '#F9FAFB', padding: 20 },
+  header: { alignItems: 'center', marginBottom: 25 },
+  headerTitle: { fontSize: 26, fontWeight: 'bold', marginTop: 5 },
+  headerSubtitle: { fontSize: 16, color: '#666', marginTop: 4 },
+  cardScroll: { marginBottom: 25 },
+  featuredCard: { width: 280, backgroundColor: '#fff', borderRadius: 12, padding: 15, elevation: 3, marginRight: 20 },
+  featuredImage: { width: '100%', height: 180, borderRadius: 10 },
+  petName: { fontSize: 20, fontWeight: 'bold', marginTop: 10 },
+  petInfo: { fontSize: 14, color: '#888', marginBottom: 8 },
+  petDesc: { fontSize: 14, color: '#444', marginBottom: 12 },
+  adoptButton: { backgroundColor: '#4A90E2', paddingVertical: 10, borderRadius: 8, alignItems: 'center', marginTop: 5 },
+  adoptButtonText: { color: '#fff', fontSize: 15, fontWeight: '600' },
+  sectionTitle: { fontSize: 20, fontWeight: 'bold', marginBottom: 10, marginTop: 10, color: '#333' },
+  steps: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 25 },
+  step: { alignItems: 'center', flex: 1 },
+  stepText: { marginTop: 5, fontSize: 12, color: '#444', textAlign: 'center' },
+  storyScroll: { marginBottom: 25 },
+  storyCard: { width: 150, backgroundColor: '#fff', borderRadius: 10, marginRight: 15, elevation: 2, overflow: 'hidden' },
+  storyImage: { width: '100%', height: 100 },
+  storyText: { padding: 10, fontSize: 14, fontWeight: 'bold', color: '#333' },
 });
 
 export default AdoptionRescue;

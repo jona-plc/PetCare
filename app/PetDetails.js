@@ -1,5 +1,4 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import React from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 const PetDetails = () => {
@@ -31,11 +30,18 @@ const PetDetails = () => {
         <Text style={styles.buttonText}>Daily Care</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Training Tips</Text>
-      </TouchableOpacity>
+      <TouchableOpacity 
+      style={styles.button}
+      onPress={() => navigation.navigate('TrainingTips', { pet })}
+     >     
+     <Text style={styles.buttonText}>Training Tips</Text>
+     </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('HealthConcerns', { pet })}
+      >
         <Text style={styles.buttonText}>Health Concerns</Text>
       </TouchableOpacity>
     </ScrollView>
