@@ -1,5 +1,5 @@
 import { useRoute } from '@react-navigation/native';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Image,
   Modal,
@@ -103,6 +103,94 @@ const RecommendedCare = () => {
           'Luna should always have access to fresh water.\n\n• Change her water twice daily\n• Add ice cubes in the summer for added coolness\n• Keep her water bowl in a shaded spot',
       },
     ],
+    Daisy: [
+      {
+        title: 'Vitamins',
+        detail:
+          'Daisy benefits from joint-support and multivitamins to keep her agile.\n\nSuggested Vitamins:\n• Nutri-Vet Joint Health Chewables\n• Zesty Paws All-in-One Multivitamin\n\nAlways consult your vet for dosage.',
+      },
+      {
+        title: 'Bath',
+        detail:
+          'Daisy enjoys a relaxing bath once every 3 weeks.\n\nRecommended Shampoos:\n• PetPleasant Lavender & Oatmeal\n• TropiClean Hypo-Allergenic Shampoo\n• Burt’s Bees Natural Dog Shampoo',
+      },
+      {
+        title: 'Exercise',
+        detail:
+          'Daisy requires daily outdoor exercise to stay fit.\n\nSuggestions:\n• 30-minute walk\n• Jogging in the park\n• Fetch and play with a frisbee',
+      },
+      {
+        title: 'Hydration',
+        detail:
+          'Ensure Daisy drinks enough water.\n\n• Change her water every day\n• Place the bowl in a cool, shaded area\n• Add ice cubes during warm days',
+      },
+    ],
+    Oliver: [
+      {
+        title: 'Vitamins',
+        detail:
+          'Oliver requires multivitamins to maintain his coat and joints.\n\nSuggested Vitamins:\n• Pet Naturals of Vermont Daily Multivitamin\n• Zesty Paws Omega Bites\n\nConsult with your vet for the correct dosage.',
+      },
+      {
+        title: 'Bath',
+        detail:
+          'Oliver’s bath should be given once every month.\n\nRecommended Shampoos:\n• Vet’s Best Hypo-Allergenic Shampoo\n• Earthbath All Natural Pet Shampoo\n• PetPleasant Oatmeal Shampoo',
+      },
+      {
+        title: 'Exercise',
+        detail:
+          'Oliver enjoys both indoor and outdoor playtime.\n\nSuggestions:\n• 15-20 minute walk\n• Tug-of-war with a rope toy\n• Hide-and-seek inside',
+      },
+      {
+        title: 'Hydration',
+        detail:
+          'Keep Oliver hydrated with clean, fresh water.\n\n• Change his water twice daily\n• Monitor for signs of dehydration such as dry gums',
+      },
+    ],
+    Rex: [
+      {
+        title: 'Vitamins',
+        detail:
+          'Rex requires a mix of multivitamins and joint-support supplements.\n\nSuggested Vitamins:\n• Nutri-Vet Senior Vitamins\n• Zesty Paws Omega Bites\n\nConsult with a vet for correct dosages.',
+      },
+      {
+        title: 'Bath',
+        detail:
+          'Rex should be bathed every 2 weeks.\n\nSuggested Shampoos:\n• Burt’s Bees Oatmeal Shampoo\n• TropiClean Pet Shampoo\n• Earthbath All Natural Shampoo',
+      },
+      {
+        title: 'Exercise',
+        detail:
+          'Rex loves running in the park.\n\nSuggestions:\n• 30-minute walk\n• Running and fetch\n• Tug-of-war with a rope toy',
+      },
+      {
+        title: 'Hydration',
+        detail:
+          'Ensure Rex stays hydrated.\n\n• Change his water every day\n• Monitor his hydration level and check for signs of dehydration.',
+      },
+    ],
+    Bella2: [
+      {
+        title: 'Vitamins',
+        detail:
+          'Bella2 needs joint health supplements and a multivitamin to stay healthy.\n\nSuggested Vitamins:\n• Dasuquin Joint Health\n• Zesty Paws Omega Bites\n\nConsult your vet for proper dosage.',
+      },
+      {
+        title: 'Bath',
+        detail:
+          'Bella2 should be bathed once every 2 weeks.\n\nRecommended Products:\n• Vet’s Best Hypoallergenic Shampoo\n• Earthbath All Natural Pet Shampoo',
+      },
+      {
+        title: 'Exercise',
+        detail:
+          'Bella2 enjoys outdoor activities.\n\nSuggestions:\n• 20-minute morning walk\n• Playtime with toys like frisbees or balls',
+      },
+      {
+        title: 'Hydration',
+        detail:
+          'Ensure Bella2 always has access to fresh water.\n\n• Change water every day\n• Keep water bowl in a shaded area on hot days.',
+      },
+    ],
   };
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -121,7 +209,6 @@ const RecommendedCare = () => {
   };
 
   const formatText = (text) => {
-    // Split the text by newlines and return an array of Text components
     return text.split('\n').map((line, index) => (
       <Text key={index} style={styles.modalText}>{line}</Text>
     ));
@@ -149,7 +236,6 @@ const RecommendedCare = () => {
         )}
       </View>
 
-      {/* Modal for topic details */}
       <Modal visible={modalVisible} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={styles.modalCard}>

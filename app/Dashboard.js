@@ -16,6 +16,10 @@ const pets = [
   { id: 2, name: 'Charlie', image: 'https://placedog.net/300/200?id=2' },
   { id: 3, name: 'Max', image: 'https://placedog.net/300/200?id=3' },
   { id: 4, name: 'Luna', image: 'https://placedog.net/300/200?id=4' },
+  { id: 5, name: 'Rocky', image: 'https://placedog.net/300/200?id=5' },
+  { id: 6, name: 'Daisy', image: 'https://placedog.net/300/200?id=6' },
+  { id: 7, name: 'Milo', image: 'https://placedog.net/300/200?id=7' },
+  { id: 8, name: 'Buddy', image: 'https://placedog.net/300/200?id=8' },
 ];
 
 const Dashboard = () => {
@@ -35,10 +39,24 @@ const Dashboard = () => {
     navigation.navigate('AdoptionRescue');
   };
 
-  // ✅ Add this function for accessories
   const goToAccessories = () => {
     toggleMenu();
     navigation.navigate('PetAccessories');
+  };
+
+  const goToSeasonalTips = () => {
+    toggleMenu();
+    navigation.navigate('SeasonalPetCare');
+  };
+
+  const goToAboutUs = () => {
+    toggleMenu();
+    navigation.navigate('AboutUs');
+  };
+
+  const goToContactVet = () => {
+    toggleMenu();
+    navigation.navigate('ContactVet'); 
   };
 
   return (
@@ -76,7 +94,6 @@ const Dashboard = () => {
               <Ionicons name="close" size={30} color="#333" />
             </TouchableOpacity>
 
-            {/* ✅ Updated this item to call the function */}
             <TouchableOpacity onPress={goToAccessories}>
               <Text style={styles.menuItem}>Pet Accessories & Essentials</Text>
             </TouchableOpacity>
@@ -85,13 +102,15 @@ const Dashboard = () => {
               <Text style={styles.menuItem}>Adoption & Rescue</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={goToSeasonalTips}>
               <Text style={styles.menuItem}>Seasonal Pet Care Tips</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+
+            <TouchableOpacity onPress={goToAboutUs}>
               <Text style={styles.menuItem}>About Us</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+
+            <TouchableOpacity onPress={goToContactVet}>
               <Text style={styles.menuItem}>Contact Vet</Text>
             </TouchableOpacity>
           </View>
@@ -106,7 +125,6 @@ const Dashboard = () => {
     </View>
   );
 };
-
 
 export default Dashboard;
 

@@ -148,7 +148,6 @@ const TrainingTips = () => {
 
 export default TrainingTips;
 
-// styles same as DailyCare styles...
 const styles = StyleSheet.create({
   container: {
     padding: 20,

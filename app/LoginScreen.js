@@ -19,8 +19,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-
-  // Load the image URI using expo-asset for cross-platform compatibility
+  
   const loginImage = Asset.fromModule(require('../assets/images/login.png')).uri;
 
   const handleLogin = async () => {

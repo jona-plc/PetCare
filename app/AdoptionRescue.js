@@ -1,8 +1,9 @@
-// app/AdoptionRescue.js
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { useState } from 'react';
 import {
   Image,
+  Modal,
   ScrollView,
   StyleSheet,
   Text,
@@ -69,6 +70,7 @@ const recentlyRescuedPets = [
 
 const AdoptionRescue = () => {
   const router = useRouter();
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleAdoptClick = (pet) => {
     router.push({
@@ -90,11 +92,7 @@ const AdoptionRescue = () => {
         <Text style={styles.headerSubtitle}>Give them a second chance.</Text>
       </View>
 
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.cardScroll}
-      >
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.cardScroll}>
         {pets.map((pet, index) => (
           <View key={index} style={styles.featuredCard}>
             <Image source={{ uri: pet.image }} style={styles.featuredImage} />
@@ -162,9 +160,25 @@ const AdoptionRescue = () => {
         ))}
       </ScrollView>
 
-      <TouchableOpacity style={styles.adoptButton} onPress={() => alert('Browse all pets feature coming soon!')}>
+      <TouchableOpacity style={styles.adoptButton} onPress={() => setModalVisible(true)}>
         <Text style={styles.adoptButtonText}>Browse All Pets for Adoption</Text>
       </TouchableOpacity>
+
+      <Modal
+        visible={modalVisible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Browse all pets feature coming soon!</Text>
+            <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.okButton}>
+              <Text style={styles.okButtonText}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 };
@@ -175,21 +189,77 @@ const styles = StyleSheet.create({
   headerTitle: { fontSize: 26, fontWeight: 'bold', marginTop: 5 },
   headerSubtitle: { fontSize: 16, color: '#666', marginTop: 4 },
   cardScroll: { marginBottom: 25 },
-  featuredCard: { width: 280, backgroundColor: '#fff', borderRadius: 12, padding: 15, elevation: 3, marginRight: 20 },
+  featuredCard: {
+    width: 280,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    padding: 15,
+    elevation: 3,
+    marginRight: 20,
+  },
   featuredImage: { width: '100%', height: 180, borderRadius: 10 },
   petName: { fontSize: 20, fontWeight: 'bold', marginTop: 10 },
   petInfo: { fontSize: 14, color: '#888', marginBottom: 8 },
   petDesc: { fontSize: 14, color: '#444', marginBottom: 12 },
-  adoptButton: { backgroundColor: '#4A90E2', paddingVertical: 10, borderRadius: 8, alignItems: 'center', marginTop: 5 },
+  adoptButton: {
+    backgroundColor: '#4A90E2',
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 5,
+  },
   adoptButtonText: { color: '#fff', fontSize: 15, fontWeight: '600' },
-  sectionTitle: { fontSize: 20, fontWeight: 'bold', marginBottom: 10, marginTop: 10, color: '#333' },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginTop: 10,
+    color: '#333',
+  },
   steps: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 25 },
   step: { alignItems: 'center', flex: 1 },
   stepText: { marginTop: 5, fontSize: 12, color: '#444', textAlign: 'center' },
   storyScroll: { marginBottom: 25 },
-  storyCard: { width: 150, backgroundColor: '#fff', borderRadius: 10, marginRight: 15, elevation: 2, overflow: 'hidden' },
+  storyCard: {
+    width: 150,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginRight: 15,
+    elevation: 2,
+    overflow: 'hidden',
+  },
   storyImage: { width: '100%', height: 100 },
   storyText: { padding: 10, fontSize: 14, fontWeight: 'bold', color: '#333' },
+
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalContent: {
+    width: '80%',
+    backgroundColor: 'white',
+    padding: 25,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalText: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 15,
+    color: '#333',
+  },
+  okButton: {
+    backgroundColor: '#4A90E2',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 6,
+  },
+  okButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
 });
 
 export default AdoptionRescue;

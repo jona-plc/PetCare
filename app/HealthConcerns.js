@@ -10,83 +10,159 @@ import {
   View,
 } from 'react-native';
 
-const HealthConcerns = () => {
+const RecommendedCare = () => {
   const route = useRoute();
   const { pet } = route.params;
 
-  const healthInfo = {
-  Bella: [
-    {
-      title: 'Allergies',
-      detail: 'Bella is allergic to:\n• Chicken-based food\n• Dust mites\nSymptoms include itchy paws, red eyes, or skin rashes.',
-    },
-    {
-      title: 'Vet Visits',
-      detail: 'Next checkup: June 2025.\nLast vaccine: March 2025 (Rabies, Parvo).\nAnnual heartworm test recommended.',
-    },
-    {
-      title: 'Weight Monitoring',
-      detail: 'Bella tends to gain weight quickly.\nDaily walks and a low-fat diet are essential.\nAvoid table scraps.',
-    },
-  ],
-  Charlie: [
-    {
-      title: 'Ear Infections',
-      detail: 'Charlie is prone to ear infections.\nClean ears weekly using vet-approved solution.\nVisit vet if ears are red, smelly, or itchy.',
-    },
-    {
-      title: 'Dental Health',
-      detail: 'Brush Charlie\'s teeth twice a week.\nHe enjoys dental chews—offer after meals.\nWatch for bleeding gums or bad breath.',
-    },
-    {
-      title: 'Seasonal Allergies',
-      detail: 'During spring, Charlie may sneeze or have watery eyes.\nLimit time outside during high pollen days.',
-    },
-  ],
-  Max: [
-    {
-      title: 'Joint Health',
-      detail: 'Max has mild arthritis symptoms.\nAdd glucosamine supplements and keep him active with light exercises.',
-    },
-    {
-      title: 'Digestive Issues',
-      detail: 'Max has a sensitive stomach:\n• Avoid fatty treats\n• No table scraps\n• Stick to prescribed kibble',
-    },
-    {
-      title: 'Skin Irritation',
-      detail: 'Occasional dry patches around elbows.\nUse oatmeal shampoo and monitor during hot weather.',
-    },
-  ],
-  Luna: [
-    {
-      title: 'Flea Sensitivity',
-      detail: 'Luna has allergic reactions to flea bites.\nApply flea prevention monthly.\nWash bedding weekly and vacuum carpets.',
-    },
-    {
-      title: 'Vaccination Records',
-      detail: 'All core vaccines are up to date.\nNext heartworm test: August 2025.\nDeworming due: July 2025.',
-    },
-    {
-      title: 'Eye Discharge',
-      detail: 'Occasional mild discharge in mornings.\nWipe gently with damp cloth.\nConsult vet if it turns green or thick.',
-    },
-  ],
-};
-
+  const careTopics = {
+    Bella: [
+      {
+        title: 'Vitamins',
+        detail:
+          'Bella needs daily multivitamins with Omega-3 and calcium. Administer after morning meals. Here are some recommended vitamins:\n\n• Nutri-Vet Multi-Vite Chewables\n• Zesty Paws Omega Bites\n• Pet-Tabs Plus Daily Vitamin\n\nConsult your vet before introducing new supplements.',
+      },
+      {
+        title: 'Bath',
+        detail:
+          'Give Bella a bath every 2 weeks using gentle, dog-friendly shampoo. Always dry her coat thoroughly.\n\nSuggested Products:\n• Burt’s Bees Oatmeal Shampoo\n• Earthbath All Natural Pet Shampoo\n• Vet’s Best Hypo-Allergenic Shampoo',
+      },
+      {
+        title: 'Exercise',
+        detail:
+          'Bella needs physical activity daily for both mental and physical health.\n\nSuggestions:\n• 30-minute walk in the morning\n• Fetch using soft ball or toy\n• Hide & Seek indoors\n• Tug-of-war with a rope toy',
+      },
+      {
+        title: 'Hydration',
+        detail:
+          'Ensure Bella drinks clean, fresh water throughout the day. Tips:\n\n• Change water 2x daily\n• Add ice cubes on hot days\n• Consider a pet water fountain for flowing water\n• Monitor signs of dehydration: dry gums, lethargy, sunken eyes',
+      },
+    ],
+    Charlie: [
+      {
+        title: 'Vitamins',
+        detail:
+          'Charlie benefits from joint-support vitamins and multivitamins.\n\nSuggested Vitamins:\n• Dasuquin Joint Health Chewables\n• VetriScience Laboratories Multivitamin\n\nConsult with a vet for dosage specifics.',
+      },
+      {
+        title: 'Bath',
+        detail:
+          'Charlie\'s coat should be bathed once every 3 weeks.\n\nRecommended Shampoos:\n• Pet Pleasant Lavender & Oatmeal\n• TropiClean Hypo-Allergenic Shampoo\n\nBe sure to dry completely after the bath.',
+      },
+      {
+        title: 'Exercise',
+        detail:
+          'Charlie loves his daily run around the yard. Suggestions for exercise:\n• 20-minute walk in the morning\n• 10 minutes of fetch\n• Tug-of-war with his favorite toy\n• Playtime in the yard',
+      },
+      {
+        title: 'Hydration',
+        detail:
+          'Keep fresh water available at all times.\n\n• Change water every day\n• Place water bowl in a shaded area on hot days\n• Observe for signs of dehydration (dry mouth, lethargy)',
+      },
+    ],
+    Max: [
+      {
+        title: 'Vitamins',
+        detail:
+          'Max needs a daily multivitamin to support his health.\n\nSuggested Vitamins:\n• Nutri-Vet Senior Vitamins\n• Zesty Paws Omega Bites\n\nConsult with a vet for exact dosage.',
+      },
+      {
+        title: 'Bath',
+        detail:
+          'Max enjoys his bath time and should be bathed once every 4 weeks.\n\nRecommended Products:\n• PetCare Oatmeal Shampoo\n• Vet’s Best Hypoallergenic Shampoo\n• Earthbath Natural Pet Shampoo',
+      },
+      {
+        title: 'Exercise',
+        detail:
+          'Max loves outdoor activities.\n\nSuggestions:\n• 30-minute walk in the morning\n• Running in the backyard\n• Playing with toys like a frisbee',
+      },
+      {
+        title: 'Hydration',
+        detail:
+          'Max stays hydrated with fresh water at all times.\n\n• Change water every 24 hours\n• Monitor his drinking habits for dehydration signs like dry gums',
+      },
+    ],
+    Luna: [
+      {
+        title: 'Vitamins',
+        detail:
+          'Luna needs a special blend of vitamins to keep her coat shiny.\n\nSuggested Vitamins:\n• Pet Naturals of Vermont Daily Multivitamin\n• Omega-3 Fish Oil\n• Zesty Paws All-in-One Multivitamin',
+      },
+      {
+        title: 'Bath',
+        detail:
+          'Luna requires a bath once a month to maintain her fluffy coat.\n\nRecommended Shampoos:\n• Earthbath All Natural Pet Shampoo\n• Burt’s Bees Natural Dog Shampoo\n• Vet’s Best Hypoallergenic Shampoo',
+      },
+      {
+        title: 'Exercise',
+        detail:
+          'Luna enjoys a balanced routine of play and exercise.\n\nSuggestions:\n• 20-minute morning walk\n• Interactive play with toys\n• Tug-of-war and fetch',
+      },
+      {
+        title: 'Hydration',
+        detail:
+          'Luna should always have access to fresh water.\n\n• Change her water twice daily\n• Add ice cubes in the summer for added coolness\n• Keep her water bowl in a shaded spot',
+      },
+    ],
+   
+    Rocky: [
+      {
+        title: 'Vitamins',
+        detail:
+          'Rocky benefits from heart and joint support vitamins.\n\nSuggested Vitamins:\n• Nutramax Cosequin DS\n• VetriScience Vetri-DMG\n\nConsult with a vet for the appropriate dosage.',
+      },
+      {
+        title: 'Bath',
+        detail:
+          'Rocky requires a bath every 4 weeks using a gentle shampoo.\n\nSuggested Shampoos:\n• TropiClean Oatmeal & Tea Tree Shampoo\n• Earthbath Hypo-Allergenic Pet Shampoo',
+      },
+      {
+        title: 'Exercise',
+        detail:
+          'Rocky loves outdoor play, especially fetch and running.\n\nSuggestions:\n• 20-minute morning walk\n• Playing fetch\n• 10 minutes of tug-of-war',
+      },
+      {
+        title: 'Hydration',
+        detail:
+          'Always ensure Rocky has access to fresh water.\n\n• Change water daily\n• Place water in a cool spot during hot weather\n• Consider a pet water fountain for constant flow',
+      },
+    ],
+    Daisy: [
+      {
+        title: 'Vitamins',
+        detail:
+          'Daisy benefits from multivitamins and probiotics for digestive health.\n\nSuggested Vitamins:\n• Pet Naturals Daily Multi\n• Petlab Co. Probiotics for Dogs\n\nConsult with a vet for specific dosages.',
+      },
+      {
+        title: 'Bath',
+        detail:
+          'Daisy should be bathed once every 3 weeks with mild shampoo.\n\nSuggested Shampoos:\n• Vet’s Best Hypo-Allergenic Shampoo\n• Earthbath Oatmeal Shampoo for Dogs',
+      },
+      {
+        title: 'Exercise',
+        detail:
+          'Daisy loves playful activities like fetch and tug-of-war.\n\nSuggestions:\n• 30-minute walk in the morning\n• Playtime in the yard\n• Fetch with a soft ball',
+      },
+      {
+        title: 'Hydration',
+        detail:
+          'Make sure Daisy stays hydrated at all times.\n\n• Change water 2x a day\n• Add ice cubes during hot weather\n• Watch for signs of dehydration like dry nose',
+      },
+    ],
+  };
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedConcern, setSelectedConcern] = useState(null);
+  const [selectedTopic, setSelectedTopic] = useState(null);
 
-  const concerns = healthInfo[pet.name] || [];
+  const topics = careTopics[pet.name] || [];
 
-  const openModal = (concern) => {
-    setSelectedConcern(concern);
+  const openModal = (topic) => {
+    setSelectedTopic(topic);
     setModalVisible(true);
   };
 
   const closeModal = () => {
     setModalVisible(false);
-    setSelectedConcern(null);
+    setSelectedTopic(null);
   };
 
   const formatText = (text) => {
@@ -97,28 +173,31 @@ const HealthConcerns = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Health Concerns for {pet.name}</Text>
+      <Text style={styles.title}>Recommended Care for {pet.name}</Text>
       <Image source={{ uri: pet.image }} style={styles.image} />
       <View style={styles.card}>
-        {concerns.length > 0 ? (
-          concerns.map((concern, index) => (
+        {topics.length > 0 ? (
+          topics.map((topic, index) => (
             <View key={index} style={styles.topicRow}>
-              <Text style={styles.topicTitle}>{concern.title}</Text>
-              <TouchableOpacity style={styles.readButton} onPress={() => openModal(concern)}>
+              <Text style={styles.topicTitle}>{topic.title}</Text>
+              <TouchableOpacity
+                style={styles.readButton}
+                onPress={() => openModal(topic)}
+              >
                 <Text style={styles.readButtonText}>Read</Text>
               </TouchableOpacity>
             </View>
           ))
         ) : (
-          <Text style={styles.noTopics}>No health info available for {pet.name}</Text>
+          <Text style={styles.noTopics}>No care topics available for {pet.name}</Text>
         )}
       </View>
 
       <Modal visible={modalVisible} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={styles.modalCard}>
-            <Text style={styles.modalTitle}>{selectedConcern?.title}</Text>
-            {selectedConcern?.detail && formatText(selectedConcern.detail)}
+            <Text style={styles.modalTitle}>{selectedTopic?.title || 'No Title Available'}</Text>
+            {selectedTopic?.detail && formatText(selectedTopic.detail)}
             <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
               <Text style={styles.closeButtonText}>Close</Text>
             </TouchableOpacity>
@@ -129,18 +208,18 @@ const HealthConcerns = () => {
   );
 };
 
-export default HealthConcerns;
+export default RecommendedCare;
 
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: '#FCEFF9',
+    backgroundColor: '#F5FAFF',
     alignItems: 'center',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#2D2D2D',
+    color: '#3B3B3B',
     marginBottom: 15,
   },
   image: {
@@ -167,7 +246,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   readButton: {
-    backgroundColor: '#2F80ED',
+    backgroundColor: '#007AFF',
     paddingVertical: 6,
     paddingHorizontal: 16,
     borderRadius: 6,
@@ -193,7 +272,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 15,
-    color: '#EB5757',
+    color: '#007AFF',
   },
   modalText: {
     fontSize: 16,

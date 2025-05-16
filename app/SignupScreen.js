@@ -1,4 +1,3 @@
-// SignupScreen.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Asset } from 'expo-asset';
 import { useNavigation } from 'expo-router';

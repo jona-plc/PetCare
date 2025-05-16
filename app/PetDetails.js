@@ -8,13 +8,11 @@ const PetDetails = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Pet Image */}
+   
       <Image source={{ uri: pet.image }} style={styles.image} />
 
-      {/* Pet Name */}
       <Text style={styles.name}>{pet.name}</Text>
 
-      {/* Action Buttons */}
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('RecommendedCare', { pet })}
