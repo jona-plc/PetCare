@@ -11,7 +11,8 @@
       }
     },
     "android": {
-      "package": "com.jonasxxy000.petcare"
+      "package": "com.jonasxyx000.petcare",
+      "versionCode": 1
     }
   }
 }
