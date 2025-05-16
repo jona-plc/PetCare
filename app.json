@@ -4,7 +4,7 @@
     "slug": "petcare",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/images/logo.png",
     "extra": {
       "eas": {
         "projectId": "961bc29b-a65d-440e-81b2-6e71b8bd261d"
