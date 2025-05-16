@@ -28,7 +28,7 @@ export default function InquiryPage() {
     } else {
       setModalMessage('Thank you for your interest! Your inquiry has been submitted.');
       setModalSuccess(true);
-      // Clear form (optional)
+     
       setFullName('');
       setEmail('');
       setReason('');
@@ -74,7 +74,6 @@ export default function InquiryPage() {
         <Text style={styles.submitButtonText}>Submit Inquiry</Text>
       </TouchableOpacity>
 
-      {/* Modal */}
       <Modal
         transparent={true}
         animationType="fade"
